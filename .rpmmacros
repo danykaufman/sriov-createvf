@@ -1,0 +1,2 @@
+%_topdir        ~/sriov-createvf/rpmbuild
+%_sourcedir    %{_topdir}/SOURCES/%{name}-%{version}
