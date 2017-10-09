@@ -4,10 +4,6 @@ for dev in $@; do
     devnum=$(echo ${dev} | awk -F'#' '{print $1}')
     vfnum=$(echo ${dev} | awk -F'#' '{print $2}')
     echo ${vfnum} > /sys/bus/pci/devices/${devnum}/sriov_numvfs
-done
-for dev in $@; do
-    devnum=$(echo ${dev} | awk -F'#' '{print $1}')
-    vfnum=$(echo ${dev} | awk -F'#' '{print $2}')
     for ((vf=0;vf<vfnum;vf++)); do
         nodeguid=$(cat /sys/bus/pci/devices/${devnum}/virtfn${vf}/net/*/address):00:00
         echo $nodeguid > /sys/bus/pci/devices/${devnum}/sriov/${vf}/node
