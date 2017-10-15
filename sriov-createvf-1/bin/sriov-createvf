@@ -1,0 +1,14 @@
+#!/bin/sh
+
+for dev in $@; do
+    devnum=$(echo ${dev} | awk -F'#' '{print $1}')
+    vfnum=$(echo ${dev} | awk -F'#' '{print $2}')
+    echo ${vfnum} > /sys/bus/pci/devices/${devnum}/sriov_numvfs
+    for ((vf=0;vf<vfnum;vf++)); do
+        vfdev=$(grep PCI_SLOT_NAME /sys/bus/pci/devices/${devnum}/virtfn${vf}/uevent | awk -F'=' '{print $2}')
+        nodeguid=$(cat /sys/bus/pci/devices/${devnum}/virtfn${vf}/net/*/address):00:00
+        echo $vfdev > /sys/bus/pci/drivers/mlx5_core/unbind
+        echo $nodeguid > /sys/bus/pci/devices/${devnum}/sriov/${vf}/node
+        echo $vfdev > /sys/bus/pci/drivers/mlx5_core/bind
+    done
+done
