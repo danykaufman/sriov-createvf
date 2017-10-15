@@ -1,6 +1,6 @@
 [Unit]
 Description=Create Virtual Function devices
-After=network.target
+After=network-online.target
 
 [Service]
 EnvironmentFile=-/etc/sysconfig/sriov-createvf

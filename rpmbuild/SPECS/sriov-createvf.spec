@@ -37,12 +37,12 @@ rm -rf $RPM_BUILD_ROOT
 # Then we create the directories where the files go
 # don't worry if the directories exist on your target systems, rpm
 # creates if necessary
-mkdir -p $RPM_BUILD_ROOT/usr/bin
+mkdir -p $RPM_BUILD_ROOT/bin
 mkdir -p $RPM_BUILD_ROOT/etc/sysconfig/
 mkdir -p $RPM_BUILD_ROOT/etc/systemd/system/
 
 # The actual moving
-cp usr/bin/sriov-createvf $RPM_BUILD_ROOT/usr/bin
+cp bin/sriov-createvf $RPM_BUILD_ROOT/bin
 cp etc/sysconfig/sriov-createvf $RPM_BUILD_ROOT/etc/sysconfig/
 cp etc/systemd/system/sriov-createvf.service $RPM_BUILD_ROOT/etc/systemd/system/
 
@@ -53,7 +53,7 @@ rm -rf $RPM_BUILD_ROOT
 # The file section, it has to be exact, matching all files.
 # Here you have the power to implement all rights, even if they are different in the tar.gz
 
-/usr/bin/sriov-createvf
+/bin/sriov-createvf
 /etc/sysconfig/sriov-createvf
 /etc/systemd/system/sriov-createvf.service
 
